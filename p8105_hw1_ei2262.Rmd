@@ -9,11 +9,24 @@ library(tidyverse)
 
 # Problem 1
 
+## Description of `penguins` Dataset
 ```{r, echo = FALSE}
 data("penguins", package = "palmerpenguins")
 #Viewing dataset (name/values)
 penguins
+```
+The dataset `penguins` focuses on the following descriptive characteristics of penguins:
 
+1. Type of species
+2. Island of origin
+3. Bill length of penguin(in mm)
+4. Bill depth  of penguin(in mm)
+5. Flipper length of penguin(in mm)
+6. Body mass of penguin(in g)
+7. Sex of penguin
+8. Year penguin was born
+
+```{r, echo = FALSE}
 #Number of rows 
 nrow(penguins)
 #Number of columns
@@ -22,19 +35,11 @@ ncol(penguins)
 #Mean flipper length
 mean(penguins$flipper_length_mm, na.rm = TRUE)
 ```
-The dataset `penguins` focuses on the following descriptive characteristics of penguins:
-
-1. Type of species
-2. Island of origin
-3. Bill length (in mm)
-4. Bill depth (in mm)
-5. Flipper length (in mm)
-6. Body mass (in g)
-7. Sex of penguin
-8. Year
 
 The dataset contains 344 rows and 8 columns. 
 The mean flipper length is 200.92 mm.
+
+## Scatterplot
 
 The following is a scatterplot with `bill_length_mm` on the x-axis and
 `flipper_length_mm`on the y-axis. The dataset is color coordinated based on the 
@@ -43,8 +48,41 @@ variable `species`.
 ggplot(data = penguins, aes(x=bill_length_mm,y=flipper_length_mm))+geom_point(aes(color=species))
 ```
 
+The scatterplot was exported as a pdf to my project directory using `ggsave`. It was named "penguinsplot." 
 ```{r, echo = FALSE, include = FALSE}
 ggsave("penguinsplot.pdf", units = "mm")
 ```
+
+# Problem 2
+```{r}
+hw_df = tibble(
+  vec_numeric = rnorm(n = 10),
+  vec_logical = vec_numeric > 0,
+  vec_character = c("d","s","h","o","m","e","w","o","r","k"),
+  vec_factor = factor(c("high", "med","high","high","high","low","low","low","med","med"))
+)
+
+mean(pull(hw_df, vec_numeric))
+mean(pull(hw_df, vec_logical))
+mean(pull(hw_df, vec_character))
+mean(pull(hw_df, vec_factor))
+```
+After creating the dataframe, I tried calculating the mean of each variable. The variables that produced an output
+were *vec_numeric* and *vec_logical*. The variables that did not produce an output wer *vec_character* and *vec_factor*.
+
+# Applying `as.numeric`
+```{r, eval = FALSE, include = TRUE}
+logical_num = as.numeric(pull(hw_df, vec_logical))
+mean(logical_num)
+
+character_num = as.numeric(pull(hw_df, vec_character))
+mean(character_num)
+
+factor_num = as.numeric(pull(hw_df, vec_factor))
+mean(factor_num)
+```
+When 
+
+
 
 
