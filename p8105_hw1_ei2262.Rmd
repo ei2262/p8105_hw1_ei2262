@@ -1,12 +1,50 @@
 ---
 title: "p8105_hw1_ei2262"
-output: html_document
-date: "2022-09-15"
+output: github_document
 ---
+
+```{r, echo=FALSE, include = FALSE}
+library(tidyverse)
+```
 
 # Problem 1
 
-```{r}
-install.packages("palmerpenguins")
+```{r, echo = FALSE}
+data("penguins", package = "palmerpenguins")
+#Viewing dataset (name/values)
+penguins
+
+#Number of rows 
+nrow(penguins)
+#Number of columns
+ncol(penguins)
+
+#Mean flipper length
+mean(penguins$flipper_length_mm, na.rm = TRUE)
 ```
+The dataset `penguins` focuses on the following descriptive characteristics of penguins:
+
+1. Type of species
+2. Island of origin
+3. Bill length (in mm)
+4. Bill depth (in mm)
+5. Flipper length (in mm)
+6. Body mass (in g)
+7. Sex of penguin
+8. Year
+
+The dataset contains 344 rows and 8 columns. 
+The mean flipper length is 200.92 mm.
+
+The following is a scatterplot with `bill_length_mm` on the x-axis and
+`flipper_length_mm`on the y-axis. The dataset is color coordinated based on the 
+variable `species`.
+```{r, echo = FALSE}
+ggplot(data = penguins, aes(x=bill_length_mm,y=flipper_length_mm))+geom_point(aes(color=species))
+```
+
+```{r, echo = FALSE, include = FALSE}
+ggsave("penguinsplot.pdf", units = "mm")
+```
+
 
