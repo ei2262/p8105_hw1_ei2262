@@ -45,37 +45,45 @@ ggsave("penguinsplot.pdf", units = "mm")
 ```
 
 # Problem 2
+
+## Creating a dataframe called `hw1_df`
 ```{r}
-hw_df = tibble(
+hw1_df = tibble(
   vec_numeric = rnorm(n = 10),
   vec_logical = vec_numeric > 0,
   vec_character = c("d","s","h","o","m","e","w","o","r","k"),
   vec_factor = factor(c("high", "med","high","high","high","low","low","low","med","med"))
 )
 
-mean(pull(hw_df, vec_numeric))
-mean(pull(hw_df, vec_logical))
-mean(pull(hw_df, vec_character))
-mean(pull(hw_df, vec_factor))
+mean(pull(hw1_df, vec_numeric))
+mean(pull(hw1_df, vec_logical))
+mean(pull(hw1_df, vec_character))
+mean(pull(hw1_df, vec_factor))
 ```
-After creating the dataframe, I tried calculating the mean of each variable. I was able to calculate the mean for two variables:
-*vec_numeric* and *vec_logical*. VWhen I calculated the mean for variables *vec_character* and *vec_factor*, I got an output of *NA*.
+After creating the dataframe, I tried calculating the mean of each variable. I was able to calculate the mean for two variables: *vec_numeric* and *vec_logical*. When I calculated the mean for variables *vec_character* and *vec_factor*, I got an output of **NA**.
 
-# Applying `as.numeric`
+## Applying `as.numeric`
 ```{r, eval = FALSE, include = TRUE}
-logical_num = as.numeric(pull(hw_df, vec_logical))
+logical_num = as.numeric(pull(hw1_df, vec_logical))
 mean(logical_num)
 
-character_num = as.numeric(pull(hw_df, vec_character))
+character_num = as.numeric(pull(hw1_df, vec_character))
 mean(character_num)
 
-factor_num = as.numeric(pull(hw_df, vec_factor))
+factor_num = as.numeric(pull(hw1_df, vec_factor))
 mean(factor_num)
 ```
-After applying the `as.numeric` function to the logical, character, and factor variables, I was able to calculate the mean of
-the logical and factor variables. The character variable produces *NA* as the output.   
-A logical vector has two possible levels, true or false. Therefore, when `as.numeric` is applied to a logical vector, it would be converted the observations to a 0 (false) or to a 1 (true). 0 and 1 are both numeric values and can be used to calculate a mean value.   
-The factor vector created in the dataframe has 3 levels, high, medium, and low. When `as.numeric` is applied to it, the variable will convert each level to a corresponding number, such as 1 for high, 2 for medium, and 3 for low. Numbers 1 - 3 can then be used to calculate a mean value.  
+#### What happens?
+After applying the `as.numeric` function to the logical, character, and factor variables, I was able to calculate the mean of the logical and factor variables. The character variable produces **NA** as the output.   
 
-This helps explain what happens when I am trying to take the mean and explains why I was unable to get a mean value before applying the `as.numeric` function to the vectors I created.
+#### Why?
+A logical vector has two possible levels, true or false. Therefore, when `as.numeric` is applied, the observations in a logical vector is converted to a 0 (false) or to a 1 (true). 0 and 1 are both numeric values and can be used to calculate a mean value. In the logical vector I created in `hw_1df`, 
+
+A factor vector can have multiple levels. The one created in `hw1_df` has 3 levels: high, medium, and low. When `as.numeric` was applied to it, each level was converted to a corresponding number, such as 1 for high, 2 for medium, and 3 for low. Numbers 1 - 3 were then used to calculate a mean value.  
+
+A character vector is not numeric or logical because it is made up of characters. In the character vector created in `hw1_df`, some of values in the character strings are not properly formatted. Therefore, `as.numeric` cannot convert the characters to numeric values. This results in the **NA** output with the warning message: NAs introduced by coercion.
+
+##### Understanding the output when I tried to take the mean
+
+Analyzing the results of `mean()` after applying `as.numeric` helped me understand the why I initially got **NA** as an output. 
 
