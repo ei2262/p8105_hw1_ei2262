@@ -18,14 +18,14 @@ penguins
 ```
 The dataset `penguins` focuses on the following descriptive characteristics of penguins:
 
-1. Type of species
-2. Island of origin
-3. Bill length of penguin(in mm)
-4. Bill depth  of penguin(in mm)
-5. Flipper length of penguin(in mm)
-6. Body mass of penguin(in g)
-7. Sex of penguin
-8. Year
+1. Type of species (Adélie, Chinstrap and Gentoo)
+2. Island in Palmer Archipelago, Antarctica (Biscoe, Dream or Torgersen)
+3. Bill length of penguin (in mm)
+4. Bill depth  of penguin (in mm)
+5. Flipper length of penguin (in mm)
+6. Body mass of penguin (in g)
+7. Sex of penguin (female or male)
+8. Study year (2007, 2008, or 2009)
 
 The dataset contains `r nrow(penguins)` rows and `r ncol(penguins)` columns. 
 The mean flipper length is `r round(mean(penguins$flipper_length_mm, na.rm = TRUE),2)` mm.
