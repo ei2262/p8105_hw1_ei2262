@@ -79,7 +79,3 @@ The factor vector created in the dataframe has 3 levels, high, medium, and low. 
 
 This helps explain what happens when I am trying to take the mean and explains why I was unable to get a mean value before applying the `as.numeric` function to the vectors I created.
 
-
-
-
-
